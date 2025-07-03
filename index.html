@@ -46,6 +46,7 @@
   input[type="password"] {
     width: 90%;
     padding: 0.9rem;
+    padding-right: 36px; /* Asegura espacio para el ícono en ambos campos */
     margin-left: auto;
     margin-right: auto;
     display: block;
@@ -55,6 +56,10 @@
     font-size: 1rem;
     background: #f7f9fa;
     transition: border 0.2s;
+  }
+  /* Si solo quieres el padding extra en contraseña, usa esto: */
+  input[type="password"] {
+    padding-right: 36px;
   }
   input[type="email"]:focus,
   input[type="password"]:focus {
@@ -121,7 +126,7 @@
     <form id="loginForm">
       <input type="email" id="email" placeholder="Correo electrónico" required autocomplete="username" />
       <div style="width: 100%; position: relative; margin-bottom: 1.1rem;">
-        <input type="password" id="password" placeholder="Contraseña" required autocomplete="current-password" style="width: 90%; padding-right: 36px;" />
+        <input type="password" id="password" placeholder="Contraseña" required autocomplete="current-password" />
         <span id="togglePassword" style="position: absolute; right: 16px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #0070ba; font-size: 1.2rem;">
           <svg id="eyeIcon" xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24"><path stroke="#0070ba" stroke-width="2" d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12Z"/><circle cx="12" cy="12" r="3" stroke="#0070ba" stroke-width="2"/></svg>
         </span>
