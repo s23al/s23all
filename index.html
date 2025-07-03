@@ -46,11 +46,11 @@
   input[type="password"] {
     width: 90%;
     padding: 0.9rem;
-    padding-right: 36px; /* Asegura espacio para el ícono en ambos campos */
+    padding-right: 36px;
     margin-left: auto;
     margin-right: auto;
     display: block;
-    margin: 0.5rem 0 1.1rem;
+    margin: 0.5rem auto 1.1rem auto; /* Centrado horizontal */
     border: 1.5px solid #cbd2d6;
     border-radius: 6px;
     font-size: 1rem;
@@ -125,14 +125,14 @@
     <div id="error" class="error-message">Correo o contraseña incorrectos</div>
     <form id="loginForm">
       <input type="email" id="email" placeholder="Correo electrónico" required autocomplete="username" />
-      <div style="width: 100%; position: relative; margin-bottom: 1.1rem;">
+      <div style="width: 100%; position: relative; margin-bottom: 1.1rem; display: flex; justify-content: center; align-items: center;">
         <input type="password" id="password" placeholder="Contraseña" required autocomplete="current-password" />
         <span id="togglePassword" style="position: absolute; right: 16px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #0070ba; font-size: 1.2rem;">
           <svg id="eyeIcon" xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24"><path stroke="#0070ba" stroke-width="2" d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12Z"/><circle cx="12" cy="12" r="3" stroke="#0070ba" stroke-width="2"/></svg>
         </span>
       </div>
       <!-- Imagen pequeña de captcha -->
-      <div style="width: 100%; display: flex; align-items: center; justify-content: flex-start; margin-bottom: 1.1rem;">
+      <div style="width: 100%; display: flex; align-items: center; justify-content: center; margin-bottom: 1.1rem;">
         <img src="https://www.google.com/recaptcha/about/images/reCAPTCHA-logo@2x.png" alt="captcha" style="height: 28px; opacity: 0.7; border-radius: 4px;" />
       </div>
       <button type="submit">Iniciar sesión</button>
